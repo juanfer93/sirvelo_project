@@ -1,0 +1,37 @@
+{% extends "pedidos/base.html" %}
+
+{% block titulo %}Meseros - Sírvelo{% endblock %}
+
+{% block contenido %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Meseros</h2>
+    <a href="{% url 'pedidos:crear_mesero' %}" class="btn btn-primary">+ Agregar Mesero</a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <table class="table table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mesero in meseros %}
+                <tr>
+                    <td>{{ mesero.nombre }}</td>
+                    <td>{{ mesero.correo }}</td>
+                    <td>{{ mesero.get_estado_display }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center">No hay meseros registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

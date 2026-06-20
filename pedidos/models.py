@@ -73,14 +73,13 @@ class Pedido(models.Model):
         ('entregado', 'Entregado'), 
         ('rechazado', 'Rechazado')
     ]
-    ENTREGA_CHOICES = [('mesa', 'Mesa'), ('domicilio', 'Domicilio')]
     
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT) # Protege integridad 
     metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.PROTECT)
     fecha_hora = models.DateTimeField(auto_now_add=True) # Fecha automática al crear 
     total_pagar = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='nuevo')
-    tipo_entrega = models.CharField(max_length=15, choices=ENTREGA_CHOICES)
+    tipo_entrega = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'pedido'
